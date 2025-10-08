@@ -17,18 +17,27 @@ module tb ();
   reg clk;
   reg rst_n;
   reg ena;
+  wire Test_Switch;
   reg [7:0] ui_in;
   reg [7:0] uio_in;
   wire [7:0] uo_out;
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
+  wire [3:0] I_Test;
+  wire [3:0] Q_Test;
+
+
+// Assign the test input
+  assign ui_in[3:0] = I_Test;
+  assign ui_in[7:4] = Q_Test;
+
 `ifdef GL_TEST
   wire VPWR = 1'b1;
   wire VGND = 1'b0;
 `endif
 
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+  tt_um_BLE_RX user_project (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
@@ -44,6 +53,13 @@ module tb ();
       .ena    (ena),      // enable - goes high when design is selected
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
+  );
+
+  I_Q_data BPF_TEST(
+      .clk(clk),
+      .switch(Test_Switch),
+      .Test_DataI(I_Test),
+      .Test_DataQ(Q_Test)
   );
 
 endmodule

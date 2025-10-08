@@ -5,50 +5,56 @@ project:
   discord:      "ericzhou_34801"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Digital Baseband for SCµM3 BLE"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     16000000     # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "4x4"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_BLE_RX"
 
   # List your project's source files here.
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "project.v"
+    - "debug.v"
+    - "Matched_Filter.v"
+    - "Packet_Sniffer.v"
+    - "Timing_Recovery_BLE.v"
+    - "tt_um_BLE_RX.v"
+    - "TOP_RX.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "I_0"
+  ui[1]: "I_1"
+  ui[2]: "I_2"
+  ui[3]: "I_3"
+  ui[4]: "Q_0"
+  ui[5]: "Q_1"
+  ui[6]: "Q_2"
+  ui[7]: "Q_3"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  # // [7:5]=LED[2:0], [4]=clk_Debug, [3]=update, [2]=value, [1]=packet_trigger, [0]=packet_detectedLED
+  uo[0]: "LED[2]"
+  uo[1]: "LED[1]"
+  uo[2]: "LED[0]"
+  uo[3]: "clk_Debug"
+  uo[4]: "update"
+  uo[5]: "value"
+  uo[6]: "packet_trigger"
+  uo[7]: "packet_detectedLED"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
+  uio[0]: "select0"
+  uio[1]: "select1"
+  uio[2]: "I_Debug_0"
+  uio[3]: "I_Debug_1"
+  uio[4]: "I_Debug_2"
+  uio[5]: "I_Debug_3"
   uio[6]: ""
   uio[7]: ""
 
