@@ -1,5 +1,3 @@
-
-`default_nettype none
 module tt_um_BLE_RX (
 // gate-level sim power pin (ignored in RTL sim) (according to)
 `ifdef GL_TEST
@@ -16,9 +14,10 @@ module tt_um_BLE_RX (
     input  wire       clk,      // system clock
     input  wire       rst_n     // active-low reset
 );
-    // Unused bidirectional outputs for now
-    assign uio_out = { 2'b00, I_Debug, 2'b00 };      // [7:6]=00, [5:2]=I_Debug, [1:0]=00
-    assign uio_oe  = { 2'b00, 4'b1111, 2'b00 };      // enable only bits [5:2]
+
+    // No bidirectional I/O used
+    assign uio_out = 8'h00;
+    assign uio_oe  = 8'h00;
 
     wire rst = rst_n;
 
@@ -29,10 +28,7 @@ module tt_um_BLE_RX (
 
 
     // Wires for TOP outputs
-    wire [2:0] LED;
-    wire       update, value, clk_Debug;
-    wire [3:0] I_Debug, Q_Debug;
-    wire       packet_trigger, packet_detectedLED;
+    wire       update, value;
 
     // Instantiate existing top-level system
     TOP_RX u_top (
@@ -41,19 +37,13 @@ module tt_um_BLE_RX (
         .rst               (rst),
         .I_BPF             (I_BPF),
         .Q_BPF             (Q_BPF),
-        .LED               (LED),
         .update            (update),
-        .value             (value),
-        .clk_Debug         (clk_Debug),
-        .I_Debug           (I_Debug),
-        .Q_Debug           (Q_Debug),
-        .packet_trigger    (packet_trigger),
-        .packet_detectedLED(packet_detectedLED)
+        .value             (value)
     );
 
     // Expose useful status bits on Tiny Tapeout outputs:
     // [7:5]=LED[2:0], [4]=clk_Debug, [3]=update, [2]=value, [1]=packet_trigger, [0]=packet_detectedLED
-    assign uo_out = { LED, clk_Debug, update, value, packet_trigger, packet_detectedLED };
+    assign uo_out = {6'b000000, update, value};
     // Avoid unused warnings
     wire _unused = &{ena};
 endmodule

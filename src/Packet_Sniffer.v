@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 module Packet_Sniffer #(
     parameter PACKET_LEN_MAX = 376,
     parameter PREAMBLE_LEN = 8,

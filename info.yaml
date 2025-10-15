@@ -17,7 +17,6 @@ project:
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "debug.v"
     - "Matched_Filter.v"
     - "Packet_Sniffer.v"
     - "Timing_Recovery_BLE.v"
@@ -28,33 +27,33 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "I_0"
-  ui[1]: "I_1"
-  ui[2]: "I_2"
-  ui[3]: "I_3"
-  ui[4]: "Q_0"
-  ui[5]: "Q_1"
-  ui[6]: "Q_2"
-  ui[7]: "Q_3"
+  ui[0]: "I_BPF[0]"
+  ui[1]: "I_BPF[1]"
+  ui[2]: "I_BPF[2]"
+  ui[3]: "I_BPF[3]"
+  ui[4]: "Q_BPF[0]"
+  ui[5]: "Q_BPF[1]"
+  ui[6]: "Q_BPF[2]"
+  ui[7]: "Q_BPF[3]"
 
   # Outputs
   # // [7:5]=LED[2:0], [4]=clk_Debug, [3]=update, [2]=value, [1]=packet_trigger, [0]=packet_detectedLED
-  uo[0]: "LED[2]"
-  uo[1]: "LED[1]"
-  uo[2]: "LED[0]"
-  uo[3]: "clk_Debug"
-  uo[4]: "update"
-  uo[5]: "value"
-  uo[6]: "packet_trigger"
-  uo[7]: "packet_detectedLED"
+  uo[0]: "value"
+  uo[1]: "update"
+  uo[2]: "0"
+  uo[3]: "0"
+  uo[4]: "0"
+  uo[5]: "0"
+  uo[6]: "0"
+  uo[7]: "0"
 
   # Bidirectional pins
   uio[0]: "select0"
   uio[1]: "select1"
-  uio[2]: "I_Debug_0"
-  uio[3]: "I_Debug_1"
-  uio[4]: "I_Debug_2"
-  uio[5]: "I_Debug_3"
+  uio[2]: ""
+  uio[3]: ""
+  uio[4]: ""
+  uio[5]: ""
   uio[6]: ""
   uio[7]: ""
 

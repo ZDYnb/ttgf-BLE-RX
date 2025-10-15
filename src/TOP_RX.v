@@ -1,4 +1,3 @@
-`timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Engineer: Jacob Louie
 // 
@@ -13,22 +12,10 @@ module TOP_RX(
     input rst,                      // FPGA SW[15]
     input [3:0] I_BPF,              // I_BPF SCuM
     input [3:0] Q_BPF,              // I_BPF SCuM
-    output [2:0] LED,               // FPGA switch LEDs (debug)
     output update,                  // clock for value/data
     output value,                   // binary decoded data
-    output clk_Debug,
-    output [3:0] I_Debug,
-    output [3:0] Q_Debug,
-    output packet_trigger,
-    output packet_detectedLED          // led[2]
     );
-    assign LED[1:0] = select;
-    assign LED[2] = rst;    //Switch[15] = LED #15
-    assign clk_Debug = clk;
-    assign I_Debug = I_BPF;
-    assign Q_Debug = Q_BPF;
-    
-    
+
     parameter TARGET = 25_000_000;
     parameter TARGET2 = 250_000;
     reg [24:0] timer;
@@ -47,8 +34,6 @@ module TOP_RX(
     end
     
     assign packet_high = packet_detected | detected_delay;
-    assign packet_detectedLED = timeOn;
-    assign packet_trigger = timeOn2;
     always @(posedge clk or negedge rst) begin
         if (!rst) begin
             timer <= 0;
