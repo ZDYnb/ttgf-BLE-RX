@@ -8,7 +8,7 @@
 
 module Timing_Recovery_BLE(
     input wire clk,		            // 16MHz
-    input wire [1:0] select,        // Select between BLE template and 802.15.4 template (0/else = BLE, 1 = 802.15.4)
+    // input wire [1:0] select,        // Select between BLE template and 802.15.4 template (0/else = BLE, 1 = 802.15.4)
 	input wire rst,    
 	input wire signed [3:0] I_in, 
 	input wire signed [3:0] Q_in, 
@@ -135,8 +135,10 @@ module Timing_Recovery_BLE(
 	end
 	
 	// Calculate a new error value when buffer holds current estimate of symbol period
-	assign do_error_calc = (select == 1) ? ((shift_counter) == $signed(3'b111 + dtau)):
-	                       ((shift_counter) == $signed(4'b1111 + dtau));
+	// assign do_error_calc = (select == 1) ? ((shift_counter) == $signed(3'b111 + dtau)):
+	//                        ((shift_counter) == $signed(4'b1111 + dtau));
+
+	assign do_error_calc = (shift_counter) == $signed(4'b1111 + dtau);
 
 	// Increment the counter to shift new samples in until time to calculate error
 	always @(posedge clk or negedge rst) begin

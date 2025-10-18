@@ -22,7 +22,7 @@ module tt_um_BLE_RX (
     wire rst = rst_n;
 
     // Map TT pins to TOP ports
-    wire [1:0] select = uio_in[1:0];  // mode
+    // wire [1:0] select = uio_in[1:0];  // mode
     wire [3:0] I_BPF  = ui_in[3:0]; // I on low nibble
     wire [3:0] Q_BPF  = ui_in[7:4]; // Q on high nibble
 
@@ -33,7 +33,7 @@ module tt_um_BLE_RX (
     // Instantiate existing top-level system
     TOP_RX u_top (
         .clk               (clk),
-        .select            (select),
+        // .select            (select),
         .rst               (rst),
         .I_BPF             (I_BPF),
         .Q_BPF             (Q_BPF),

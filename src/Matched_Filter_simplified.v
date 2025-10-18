@@ -17,7 +17,7 @@ module Matched_Filter(
     output wire data                                // 1/0 output
     );
     localparam BUFFER_SIZE = 16;                     // 1 periods for BLE (8 = 1 period for 802.15.4)
-    integer i, j;                                      // counter for loop
+    integer i;                                      // counter for loop
     reg signed [3:0] I_Buffer [0:BUFFER_SIZE - 1];  // Array size 8 of 4 bit values (I_BPF)
     reg signed [3:0] Q_Buffer [0:BUFFER_SIZE - 1];  // Array size 8 of 4 bit values (Q_BPF)
     
@@ -26,7 +26,8 @@ module Matched_Filter(
     wire signed [4:0] Template_CosHigh [0:15];
     wire signed [4:0] Template_SinHigh [0:15];
     
-    
+    wire signed [4:0] Template_Cos25MHz [0:15];             // Cosine   2.5 MHz
+    wire signed [4:0] Template_Sin25MHz [0:15];             // Sine     2.5 MHz
     
     // Cosine 2.5MHz
     assign Template_Cos25MHz[0] = 5'd15;

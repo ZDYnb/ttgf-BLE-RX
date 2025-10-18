@@ -6,10 +6,9 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES := \
-	Matched_Filter.v \
+	Matched_Filter_simplified.v \
 	Packet_Sniffer.v \
 	Timing_Recovery_BLE.v \
-	debug.v \
 	TOP.v\
 	tt_um_BLE_RX.v
 

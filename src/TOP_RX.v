@@ -8,12 +8,12 @@
 
 module TOP_RX(
     input clk,                      // 16MHz SCuM ADC clock
-    input [1:0] select,             // FPGA Switches
+    // input [1:0] select,             // FPGA Switches
     input rst,                      // FPGA SW[15]
     input [3:0] I_BPF,              // I_BPF SCuM
     input [3:0] Q_BPF,              // I_BPF SCuM
     output update,                  // clock for value/data
-    output value,                   // binary decoded data
+    output value                    // binary decoded data
     );
 
     parameter TARGET = 25_000_000;
@@ -80,7 +80,7 @@ module TOP_RX(
 
     Matched_Filter filter(
         .clk(clk),
-        .select(select),
+        // .select(select),
         .rst(rst),
         .update(update),
         .I_BPF(I_BPF),
@@ -91,7 +91,7 @@ module TOP_RX(
     
      Timing_Recovery_BLE Synch(
         .clk(clk),
-        .select(select),			   
+        // .select(select),			   
 	    .rst(rst), 
 	    .I_in(I_BPF), 
 	    .Q_in(Q_BPF), // Set Low if no Input
