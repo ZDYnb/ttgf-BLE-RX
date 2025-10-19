@@ -3,13 +3,14 @@
 
 # defaults
 SIM ?= icarus
-TOPLEVEL_LANG ?= verilog
+TOPLEVEL_LANG ?= systemverilog
 SRC_DIR = $(PWD)/../src
 PROJECT_SOURCES := \
-	Matched_Filter_simplified.v \
-	Packet_Sniffer.v \
-	Timing_Recovery_BLE.v \
-	TOP.v\
+	matched_filter.sv \
+	clock_recovery.sv \
+	preamble_detect.sv \
+	packet_sniffer.sv \
+	ble_cdr \
 	tt_um_BLE_RX.v
 
 ifneq ($(GATES),yes)
