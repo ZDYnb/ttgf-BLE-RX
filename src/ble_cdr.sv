@@ -34,7 +34,6 @@ module ble_cdr #(
 );
 
     localparam PIPELINE_STAGES = 1;
-    assign packet_detected = 0;
 
     // Matched filter stuff
     logic demod_bit;
